@@ -1,6 +1,5 @@
-
-from api.constants import OpenAIModels
-from api.utils.openai import get_openai_client
+from src.constants import OpenAIModels
+from src.utils.openai import get_openai_client
 
 def get_prompt_result(prompt: str):
     openai_client = get_openai_client()
