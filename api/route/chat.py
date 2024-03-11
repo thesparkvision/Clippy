@@ -2,6 +2,8 @@ from http import HTTPStatus
 from flask import Blueprint, request 
 from flask_restx import Resource, Namespace, fields
 
+from api.services import chat as chat_service
+
 chat_ns = Namespace(name='chat', description='chat APIs', path='/')
 
 prompt_schema = chat_ns.model(name="prompt", model = {
@@ -21,4 +23,7 @@ class OpenAICompletion(Resource):
     @chat_ns.expect(prompt_schema, validate=True)
     def post(self):
         request_body = request.get_json()
-        return request_body
+        prompt = request_body['prompt']
+
+        result = chat_service.get_prompt_result(prompt)
+        return result
