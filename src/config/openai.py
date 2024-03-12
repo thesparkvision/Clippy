@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-from src.config import OPENAI_API_KEY
+from src.config.env import OPENAI_API_KEY
 
 def get_openai_client():
     """

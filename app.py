@@ -1,9 +1,9 @@
 from flask import Flask
 
 from src.route import blueprint
-from src.config import DATABASE_URI
-from src.utils.db import db, migrate
-from src.utils.auth import jwt
+from src.config.env import DATABASE_URI
+from src.config.db import db, migrate
+from src.config.auth import jwt
 
 def create_app():
     app = Flask(__name__)

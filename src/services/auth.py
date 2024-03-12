@@ -2,7 +2,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token
 import bcrypt
 
 from src.models import User, UserToken
-from src.utils.db import db
+from src.config.db import db
 
 def register_user(full_name, email, password):
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())

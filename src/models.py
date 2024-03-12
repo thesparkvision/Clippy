@@ -2,7 +2,7 @@ from enum import Enum
 from datetime import datetime
 from sqlalchemy import Enum as EnumSQL
 
-from src.utils.db import db
+from src.config.db import db
 
 class TokenType(Enum):
     ACCESS = 'access'
@@ -44,3 +44,19 @@ class UserToken(BaseModel):
 
     def __str__(self):
         return f"<Token {self.id}>"
+
+class PromptResult(BaseModel):
+    __tablename__ = 'prompt_results'
+
+    id = db.Column(db.Integer, primary_key=True)
+    prompt = db.Column(db.String(1000), nullable=False)
+    result = db.Column(db.String(5000))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    user = db.relationship('User', backref='promp_results')
+
+    def __repr__(self):
+        return f"<PromptResult {self.id}>"
+
+    def __str__(self):
+        return f"<PromptResult {self.id}>"

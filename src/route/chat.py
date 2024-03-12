@@ -1,7 +1,7 @@
 from http import HTTPStatus
 from flask import Blueprint, request 
 from flask_restx import Resource, Namespace, fields
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from src.services import chat as chat_service
 
@@ -24,8 +24,10 @@ class OpenAICompletion(Resource):
     @chat_ns.expect(prompt_schema, validate=True)
     @jwt_required()
     def post(self):
+        user_id = get_jwt_identity()
+
         request_body = request.get_json()
         prompt = request_body['prompt']
 
-        result = chat_service.get_prompt_result(prompt)
+        result = chat_service.get_prompt_result(user_id, prompt)
         return result

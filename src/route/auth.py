@@ -4,7 +4,7 @@ from flask_restx import Namespace, Resource, fields
 from src.services import auth as auth_service
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-auth_ns = Namespace('auth', path='', description='Authentication operations')
+auth_ns = Namespace('auth', path='', description='Auth APIs')
 
 user_model = auth_ns.model('User', {
     'full_name': fields.String(required=True, description='User full name'),
